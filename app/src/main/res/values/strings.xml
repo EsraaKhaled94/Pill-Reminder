@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Pill Reminder</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="last_time_you_took_it">Last time you took it</string>
+    <string name="times_per_day">Times per day</string>
+    <string name="medicine_name">Medicine Name</string>
+    <string name="finished_course">Finished Course</string>
+    <string name="my_medications">My Medication</string>
+    <string name="name_cant_be_empty">Name can\'t be empty</string>
+    <string name="times_per_day_cant_be_empty">Times per day can\'t be empty</string>
+    <string name="last_taken_time_cant_be_empty">Last taken time can\'t be empty</string>
+    <string name="please_select_medicine_type">Please select medicine type</string>
+    <string name="edit_medicine">Edit Medicine</string>
+    <string name="error_reciving_medicine">Error reciving medicine</string>
+    <string name="medicine_was_removed">Medicine was removed</string>
+    <string name="title">Hello</string>
+    <string name="content">Welcome</string>
+    <string name="channel_name">chann</string>
+    <string name="channel_description">medicine</string>
+    <string name="medicine_time_passed_error">Medicine time already passed ,please pick another time</string>
+    <string name="add_new_medicine">Add New Medicine</string>
+    <string name="time_to_take">Time to take %s</string>
+
+    <string name="facebook_app_id"></string>
+    <string name="fb_login_protocol_scheme">fb</string>
+    <string name="twitter_consumer_key" translatable="false"></string>
+    <string name="twitter_consumer_secret" translatable="false"></string>
+    <string name="login_successful">Login Successful</string>
+
+    <string-array name="medicine_types">
+        <item>Select Type</item>
+        <item>Syrup</item>
+        <item>Pill</item>
+        <item>Syringe</item>
+        <item>Effervescent</item>
+    </string-array>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="empty_view_text">No medications</string>
+    <string name="login_with">Login with</string>
+    <string name="no_medcine_add_some">No medicines, Add some using plus button</string>
+    <string name="next_dosage">Next dosage</string>
+    <string name="last_dosage">Last dosage</string>
+</resources>
