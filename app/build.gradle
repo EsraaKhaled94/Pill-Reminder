@@ -1,6 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'nanoDegree'
+            keyPassword 'E123456'
+            storeFile file('releaseKeyStore.jks')
+            storePassword 'E123456'
+        }
+    }
+
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.esraakhaled.apps.pillreminder"
@@ -14,6 +23,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     compileOptions {
@@ -26,8 +36,10 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:customtabs:28.0.0'
+    implementation 'com.android.support:support-v13:28.0.0'
     implementation 'com.android.support:support-media-compat:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
@@ -42,25 +54,20 @@ dependencies {
     annotationProcessor 'android.arch.persistence.room:compiler:1.0.0'
     implementation 'android.arch.lifecycle:extensions:1.1.0'
     annotationProcessor 'android.arch.lifecycle:compiler:1.1.0'
-
     implementation 'com.wdullaer:materialdatetimepicker:3.6.4'
-
     //firebase auth
-    implementation 'com.google.firebase:firebase-auth:11.6.0'
-
+    implementation 'com.google.firebase:firebase-auth:11.8.0'
+    //firebase db
+    implementation 'com.google.firebase:firebase-database:11.8.0'
     //fb login
     implementation 'com.facebook.android:facebook-login:[5,6)'
-
     //twitter login
-    implementation'com.twitter.sdk.android:twitter:3.0.0'
-
+    implementation 'com.twitter.sdk.android:twitter:3.0.0'
     //google sign in
-    implementation 'com.google.android.gms:play-services-auth:11.6.0'
-
+    implementation 'com.google.android.gms:play-services-auth:11.8.0'
     /*//Work
-    implementation "android.arch.work:work-runtime:1.0.1"
-    implementation "android.arch.work:work-firebase:1.0.0-alpha11"*/
-
+            implementation "android.arch.work:work-runtime:1.0.1"
+            implementation "android.arch.work:work-firebase:1.0.0-alpha11"*/
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

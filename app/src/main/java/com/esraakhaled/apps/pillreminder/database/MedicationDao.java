@@ -24,6 +24,9 @@ public interface MedicationDao {
     Medicine getMedicineById(long itemId);
 
     @Insert
+    void addListOfMedicines(List<Medicine> medicines);
+
+    @Insert
     long addMedicine(Medicine medicine);
 
     @Update

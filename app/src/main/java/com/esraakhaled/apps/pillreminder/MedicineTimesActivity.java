@@ -60,7 +60,7 @@ public class MedicineTimesActivity extends AppCompatActivity {
                 runOnUiThread(() -> fillMedicineData());
             });
         } else {
-            Toast.makeText(this, getString(R.string.error_reciving_medicine), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.error_receiving_medicine), Toast.LENGTH_SHORT).show();
             finish();
         }
     }

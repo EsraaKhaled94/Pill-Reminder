@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "887096153894",
+    "firebase_url": "https://pill-reminder-b770e.firebaseio.com",
+    "project_id": "pill-reminder-b770e",
+    "storage_bucket": "pill-reminder-b770e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:887096153894:android:7f03a6ed8b4102bc",
+        "android_client_info": {
+          "package_name": "com.esraakhaled.apps.pillreminder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "887096153894-tbmkf0j0cacmfamohlnk76r9a24ats9k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.esraakhaled.apps.pillreminder",
+            "certificate_hash": "8abe084a8d07be86ffde64cf20b9086d9cb45558"
+          }
+        },
+        {
+          "client_id": "887096153894-op3sfrr1275m8ntm258gqi0oar5l4lbv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUzeElXZP0mMG70zg27sLwHjS8BoSx4A8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "887096153894-op3sfrr1275m8ntm258gqi0oar5l4lbv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

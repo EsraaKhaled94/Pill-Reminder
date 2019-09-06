@@ -96,7 +96,7 @@ public class MedicineDetailsActivity extends AppCompatActivity implements TimePi
                 calendar.get(Calendar.HOUR),
                 calendar.get(Calendar.MINUTE),
                 false);
-        dialog.show(getFragmentManager(), "Datepickerdialog");
+        dialog.show(getFragmentManager(), "TIME_PICKER_DIALOG");
     }
 
     @OnClick(R.id.fab)

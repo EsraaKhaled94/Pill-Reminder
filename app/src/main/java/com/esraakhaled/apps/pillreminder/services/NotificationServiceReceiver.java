@@ -42,7 +42,7 @@ public class NotificationServiceReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         createNotificationChannel(context);
-
+//todo
         String medicineName = "";
         long medicineId = 0;
         if (intent.hasExtra(NAME)) {

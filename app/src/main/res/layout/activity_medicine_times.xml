@@ -31,9 +31,10 @@
     <ImageView
         android:id="@+id/medicine_type_image"
         android:layout_width="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:background="@drawable/white_curved_background"
+        android:contentDescription="@string/medicine_type_description"
         android:src="@drawable/pills" />
 
     <android.support.design.widget.FloatingActionButton
@@ -44,6 +45,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/fab_margin"
+        android:contentDescription="@string/finished_medicine_course"
         android:src="@drawable/ic_action_delete"
         app:fabSize="auto" />
 
@@ -55,6 +57,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_margin="@dimen/fab_margin"
+        android:contentDescription="@string/take_medicine"
         android:src="@drawable/ic_action_take_medicine"
         app:fabSize="auto" />
 </RelativeLayout>

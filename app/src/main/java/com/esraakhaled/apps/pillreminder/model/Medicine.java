@@ -5,14 +5,22 @@ import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 @Entity(tableName = "medicine")
 public class Medicine implements Parcelable {
     @PrimaryKey(autoGenerate = true)
+    @SerializedName("id")
     private long id;
+    @SerializedName("name")
     private String name;
+    @SerializedName("lastTakenTime")
     private long lastTakenTime;
+    @SerializedName("isFinished")
     private boolean isFinished;
+    @SerializedName("type")
     private String type;
+    @SerializedName("timesPerDay")
     private int timesPerDay;
 
     public long getId() {

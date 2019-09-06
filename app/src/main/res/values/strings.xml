@@ -11,11 +11,11 @@
     <string name="last_taken_time_cant_be_empty">Last taken time can\'t be empty</string>
     <string name="please_select_medicine_type">Please select medicine type</string>
     <string name="edit_medicine">Edit Medicine</string>
-    <string name="error_reciving_medicine">Error reciving medicine</string>
+    <string name="error_receiving_medicine">Error receiving medicine</string>
     <string name="medicine_was_removed">Medicine was removed</string>
     <string name="title">Hello</string>
     <string name="content">Welcome</string>
-    <string name="channel_name">chann</string>
+    <string name="channel_name">channel</string>
     <string name="channel_description">medicine</string>
     <string name="medicine_time_passed_error">Medicine time already passed ,please pick another time</string>
     <string name="add_new_medicine">Add New Medicine</string>
@@ -38,7 +38,16 @@
     <string name="add_widget">Add widget</string>
     <string name="empty_view_text">No medications</string>
     <string name="login_with">Login with</string>
-    <string name="no_medcine_add_some">No medicines, Add some using plus button</string>
+    <string name="no_medicine_add_some">No medicines, Add some using plus button</string>
     <string name="next_dosage">Next dosage</string>
     <string name="last_dosage">Last dosage</string>
+    <string name="medicine_type_description">Medicine Type</string>
+    <string name="face_login_description">Face Login</string>
+    <string name="twitter_login_description">Twitter Login</string>
+    <string name="google_login_description">Google Login</string>
+    <string name="add_medicine">Add Medicine</string>
+    <string name="finished_medicine_course">Finished Medicine Course</string>
+    <string name="take_medicine">Take Medicine</string>
+    <string name="sync_data">Sync Data</string>
+    <string name="data_synced_successfully">Data synced successfully</string>
 </resources>

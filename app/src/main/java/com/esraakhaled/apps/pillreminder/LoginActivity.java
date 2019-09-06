@@ -2,18 +2,20 @@ package com.esraakhaled.apps.pillreminder;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.esraakhaled.apps.pillreminder.database.AppExecutors;
+import com.esraakhaled.apps.pillreminder.database.MedicationDatabase;
+import com.esraakhaled.apps.pillreminder.model.Medicine;
 import com.esraakhaled.apps.pillreminder.utils.SharedPrefrencesUtil;
+import com.esraakhaled.apps.pillreminder.utils.WidgetUpdateNotifierUtil;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -22,15 +24,20 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.TwitterAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Result;
@@ -40,6 +47,9 @@ import com.twitter.sdk.android.core.TwitterConfig;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,6 +84,8 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authListener;
     private GoogleSignInClient mGoogleSignInClient;
 
+    private MedicationDatabase database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,8 +103,10 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         mAuth = FirebaseAuth.getInstance();
+/*
         mAuth.signOut();
         LoginManager.getInstance().logOut();
+*/
 
         setTwitterButtonCallbacks();
 
@@ -102,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
         //handle fb login
         initializeFacebookLogin();
 
+        database = MedicationDatabase.getInstance(this);
     }
 
     @OnClick(R.id.facebook_login)
@@ -194,10 +209,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
         mAuth.addAuthStateListener(authListener);
-        updateUI(currentUser);
     }
 
     @Override
@@ -235,24 +247,21 @@ public class LoginActivity extends AppCompatActivity {
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
-
-                        // ...
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithCredential:success");
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        updateUI(user);
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInWithCredential:failure", task.getException());
+                        Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
+                        updateUI(null);
                     }
+
+                    // ...
                 });
     }
 
@@ -299,9 +308,55 @@ public class LoginActivity extends AppCompatActivity {
             // Toast.makeText(this, user.getUid() + "", Toast.LENGTH_SHORT).show();
             Toast.makeText(this, getString(R.string.login_successful), Toast.LENGTH_SHORT).show();
             saveUserToken(user.getUid());
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
+            checkIfUserDataFound(user.getUid());
         }
+    }
+
+    private void checkIfUserDataFound(String userId) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+
+        DatabaseReference medicine = firebaseDatabase.getReference("medicine");
+
+        medicine.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean hasUser = dataSnapshot.hasChild(userId);
+                if (hasUser) {
+                    String medicinesString =
+                            dataSnapshot.child(userId).getValue(String.class);
+
+                    Log.e("MSG", medicinesString);
+                    Gson gson = new Gson();
+                    TypeToken<ArrayList<Medicine>> token = new TypeToken<ArrayList<Medicine>>() {
+                    };
+                    List<Medicine> medicines = gson.fromJson(medicinesString, token.getType());
+
+                    insertIntoDataBase(medicines);
+                } else {
+                    startMainActivity();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("DB", databaseError.getMessage() + " " + databaseError.getDetails());
+            }
+        });
+    }
+
+    private void insertIntoDataBase(List<Medicine> medicines) {
+        AppExecutors.getInstance().diskIO().execute(() -> {
+            database.medicationDao().addListOfMedicines(medicines);
+            runOnUiThread(() -> {
+                WidgetUpdateNotifierUtil.notifyWidget(this);
+                startMainActivity();
+            });
+        });
+    }
+
+    private void startMainActivity() {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 
     private void saveUserToken(String uid) {

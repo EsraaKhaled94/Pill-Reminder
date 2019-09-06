@@ -64,11 +64,13 @@
         </receiver>
 
         <service
-            android:name="com.esraakhaled.apps.pillreminder.services.GridWidgetService"
+            android:name=".services.GridWidgetService"
             android:enabled="true"
             android:exported="false"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
-
+        <service
+            android:name=".services.BackUpMedicineIntentService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

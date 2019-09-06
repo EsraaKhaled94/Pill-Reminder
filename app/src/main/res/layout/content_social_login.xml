@@ -26,6 +26,7 @@
             android:id="@+id/facebook_login"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/face_login_description"
             android:src="@drawable/facebook" />
     </FrameLayout>
 
@@ -48,6 +49,7 @@
             android:id="@+id/twitter_login"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/twitter_login_description"
             android:src="@drawable/twitter" />
     </FrameLayout>
 
@@ -68,6 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/white_curved_background"
+            android:contentDescription="@string/google_login_description"
             android:src="@drawable/google" />
     </FrameLayout>
 </LinearLayout>

@@ -15,6 +15,7 @@
         android:orientation="vertical">
 
         <ImageView
+            android:contentDescription="@string/medicine_type_description"
             android:id="@+id/medicine_type_image"
             android:layout_width="@dimen/dimen_70dp"
             android:layout_height="@dimen/dimen_70dp"
