@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'nanoDegree'
             keyPassword 'E123456'
-            storeFile file('releaseKeyStore.jks')
+            storeFile file('../releaseKeyStore.jks')
             storePassword 'E123456'
         }
     }

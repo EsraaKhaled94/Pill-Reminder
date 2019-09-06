@@ -23,6 +23,7 @@
         android:layout_alignParentStart="true">
 
         <ImageView
+            android:contentDescription="@string/medicine_last_taken_time"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/circle_outer_background" />
@@ -57,6 +58,7 @@
         android:layout_alignParentRight="true">
 
         <ImageView
+            android:contentDescription="@string/medicine_next_time_to_take"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/circle_outer_background" />

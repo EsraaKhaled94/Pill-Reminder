@@ -50,4 +50,6 @@
     <string name="take_medicine">Take Medicine</string>
     <string name="sync_data">Sync Data</string>
     <string name="data_synced_successfully">Data synced successfully</string>
+    <string name="medicine_last_taken_time">Medicine Last Taken Time</string>
+    <string name="medicine_next_time_to_take">Medicine Next Time to Take</string>
 </resources>

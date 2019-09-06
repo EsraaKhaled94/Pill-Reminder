@@ -54,7 +54,8 @@
             android:id="@+id/medicine_last_taken_time_iv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/transparent" />
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/medicine_last_taken_time" />
     </FrameLayout>
 
     <Spinner
